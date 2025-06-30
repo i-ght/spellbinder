@@ -347,7 +347,7 @@ impl FromStr for TaoTeChingKey {
     }
 }
 
-fn data() -> String {
+fn record() -> String {
     String::from(
         r#"Chapter,Text
 1,"The tao that can be told
@@ -1487,7 +1487,7 @@ By not dominating, the Master leads.""#,
 }
 
 pub fn memorize_tao_te_ching() -> Vec<String> {
-    let data = data();
+    let data = record();
     let data = data.as_bytes();
     let mut csv = csv::Reader::from_reader(data);
     let mut tao_te_ching = Vec::with_capacity(81);

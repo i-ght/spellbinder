@@ -1,6 +1,6 @@
 use rand::Rng;
 
-fn data() -> String {
+pub fn record() -> String {
     String::from(r#""Quote","Author","Source"
 "Anger blows out the lamp of the mind. In the examination of a great and important question, everyone should be serene, slow-pulsed, and calm.","Robert G. Ingersoll","The Christian Religion"
 "If you are patient in one moment of anger, you will escape a hundred days of sorrow.","Chinese Proverb",""
@@ -17,11 +17,10 @@ fn data() -> String {
 "Anger is an acid that can do more harm to the vessel in which it is stored than to anything on which it is poured.","Mark Twain",""
 "How great a matter a little fire kindleth!","The Bible ( KJV )","James 3:5"
 "Anger itself is much more hurtful for us than the injury that provokes it.","Lucius Annaeus Seneca (the younger)","""On Anger"", Moral Essays"
-"When angry, count ten, before you speak; if very angry, an hundred.","Thomas Jefferson","letter to Thomas Jefferson Smith, 21 Feb 1825"
 "It is easy to fly into a passion - anybody can do that - but to be angry with the right person and to the right extent and at the right time and with the right object and in the right way - that is not easy, and it is not everyone who can do it.","Aristotle","Nicomachean Ethics"
 "Do not teach your children never to be angry; teach them how to be angry.","Lyman Abbott","The Christian Union , 11 Sept 1884"
 "He that is soon angry dealeth foolishly.","The Bible ( KJV )","Proverbs 14:17"
-"Wise anger is like fire in a flint: there is great ado to get it out; and when it is out, it is gone againimmediately.","Matthew Henry","The Life of Mr. Philip Henry"
+"Wise anger is like fire in a flint: there is great ado to get it out; and when it is out, it is gone again immediately.","Matthew Henry","The Life of Mr. Philip Henry"
 "I was angry with my friend; I told my wrath, my wrath did end. I was angry with my foe: I told it not, my wrath did grow.","William Blake","A Poison Tree"
 "For he who gives no fuel to fire puts it out, and likewise he who does not in the beginning nurse his wrath and does not puff himself up with anger takes precautions against it and destroys it.","Plutarch","Moralia"
 "He that is slow to wrath is of great understanding: but he that is hasty of spirit exalteth folly.","The Bible ( KJV )","Proverbs 14:29"
@@ -30,26 +29,3 @@ fn data() -> String {
 "Surround yourself with those who are slow to anger, not those who are free from anger.","J.S. Felts",""
 "#)
 }
-
-pub fn memorize_anger() -> Vec<String> {
-    let data = data();
-    let data = data.as_bytes();
-    let mut csv = csv::Reader::from_reader(data);
-    let mut anger = Vec::with_capacity(81);
-
-    for record in csv.records() {
-        let record = record.unwrap();
-        let quote = record[0].to_owned();
-        let author = record[1].to_owned();
-        let source = record[2].to_owned();
-        let unit = vec![
-            quote,
-            format!("- {} | {}", author, source)
-        ].join("\n");
-        anger.push(unit);
-
-    }
-
-    anger
-}
-

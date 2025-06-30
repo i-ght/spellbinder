@@ -191,7 +191,7 @@ impl TryFrom<usize> for DanseMacabreCardKey {
     }
 }
 
-fn data() -> String {
+fn record() -> String {
     String::from(r#"Key,Name,German Name,Description,Bible Verse,Quatrain,Bible Verse Eng,Quatrain Eng
 0,Creation,Die Schöpfung aller Ding.,Eve is taken from the side of Adam. ,"Formauit Dominvs Devs hominem de limo terræ, ad imaginē suam creauit illum, masculum & fœminam creauit eos.
 
@@ -732,7 +732,7 @@ pub fn memorize_death_danse() -> Vec<DanseMacabreCard> {
     let deck = load_deck();
     assert!(deck.len() == 49);
 
-    let data = data();
+    let data = record();
     let data = data.as_bytes();
 
     let mut csv = csv::Reader::from_reader(data);

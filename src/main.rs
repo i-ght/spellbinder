@@ -1,11 +1,14 @@
 use spellbinder::{memorize_decks, Cmd, CmdConveyer, CmdCrafter, CmdRecorder, CmdConveyor, Decks};
 
+mod spellbinder;
 mod danse_macabre;
 mod tao_te_ching;
-mod spellbinder;
 mod console;
 mod maya;
 mod anger;
+mod apathy;
+mod emotions;
+mod fear;
 
 
 fn main() {
