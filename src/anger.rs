@@ -1,0 +1,55 @@
+use rand::Rng;
+
+fn data() -> String {
+    String::from(r#""Quote","Author","Source"
+"Anger blows out the lamp of the mind. In the examination of a great and important question, everyone should be serene, slow-pulsed, and calm.","Robert G. Ingersoll","The Christian Religion"
+"If you are patient in one moment of anger, you will escape a hundred days of sorrow.","Chinese Proverb",""
+"What was anger when it was new became hatred when it was turned into long continuance. Anger is a weed, hatred, a tree.","Saint Augustine","Sermons on Selected Lessons of the New Testament"
+"A man that does not know how to be angry does not know how to be good.","Henry Ward Beecher","""Moth-Eaten Garments"", Sermons"
+"There is a holy anger, excited by zeal that moves us to reprove with warmth those whom our mildness failed to correct.","John Baptiste de la Salle",""
+"Anger is not argument.","James Mills","A Letter to Sir Charles AbbottBetter a little fire to warm us than a great one to burn us."
+"Hesitation is the best cure for anger.","Lucius Annaeus Seneca (the younger)","""On Anger"", Moral Essays"
+"The best fighter is never angry.","Lao Tzu","Tao Te Ching"
+"Anger ventilated often hurries toward forgiveness; and concealed often hardens into revenge.","Edward Bulwer-Lytton","quoted in Pearls of Thought (1882) by Maturin Murray Ballou"
+"Be ye angry, and sin not: let not the sun go down upon your wrath.","The Bible ( KJV )","Ephesians 4:26"
+"The bare recollection of anger kindles anger.","Publilius Syrus","Sententiae"
+"The world needs anger. The world often continues to allow evil because it isn't angry enough.","Bede Jarrett","“Love’s Restraint”, The Vocation to Marriage"
+"Anger is an acid that can do more harm to the vessel in which it is stored than to anything on which it is poured.","Mark Twain",""
+"How great a matter a little fire kindleth!","The Bible ( KJV )","James 3:5"
+"Anger itself is much more hurtful for us than the injury that provokes it.","Lucius Annaeus Seneca (the younger)","""On Anger"", Moral Essays"
+"When angry, count ten, before you speak; if very angry, an hundred.","Thomas Jefferson","letter to Thomas Jefferson Smith, 21 Feb 1825"
+"It is easy to fly into a passion - anybody can do that - but to be angry with the right person and to the right extent and at the right time and with the right object and in the right way - that is not easy, and it is not everyone who can do it.","Aristotle","Nicomachean Ethics"
+"Do not teach your children never to be angry; teach them how to be angry.","Lyman Abbott","The Christian Union , 11 Sept 1884"
+"He that is soon angry dealeth foolishly.","The Bible ( KJV )","Proverbs 14:17"
+"Wise anger is like fire in a flint: there is great ado to get it out; and when it is out, it is gone againimmediately.","Matthew Henry","The Life of Mr. Philip Henry"
+"I was angry with my friend; I told my wrath, my wrath did end. I was angry with my foe: I told it not, my wrath did grow.","William Blake","A Poison Tree"
+"For he who gives no fuel to fire puts it out, and likewise he who does not in the beginning nurse his wrath and does not puff himself up with anger takes precautions against it and destroys it.","Plutarch","Moralia"
+"He that is slow to wrath is of great understanding: but he that is hasty of spirit exalteth folly.","The Bible ( KJV )","Proverbs 14:29"
+"He submits to be seen through a microscope, who suffers himself to be caught in a fit of passion.","Johann Kaspar Lavater","Aphorisms on Man"
+"How much more grievous are the consequences of anger than the causes of it.","Marcus Aurelius","Meditations"
+"Surround yourself with those who are slow to anger, not those who are free from anger.","J.S. Felts",""
+"#)
+}
+
+pub fn memorize_anger() -> Vec<String> {
+    let data = data();
+    let data = data.as_bytes();
+    let mut csv = csv::Reader::from_reader(data);
+    let mut anger = Vec::with_capacity(81);
+
+    for record in csv.records() {
+        let record = record.unwrap();
+        let quote = record[0].to_owned();
+        let author = record[1].to_owned();
+        let source = record[2].to_owned();
+        let unit = vec![
+            quote,
+            format!("- {} | {}", author, source)
+        ].join("\n");
+        anger.push(unit);
+
+    }
+
+    anger
+}
+
