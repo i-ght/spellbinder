@@ -1,4 +1,3 @@
-use rand::Rng;
 
 pub fn record() -> String {
     String::from(r#""Quote","Author","Source"

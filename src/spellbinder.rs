@@ -2,7 +2,7 @@ use chrono::{Datelike, Local, NaiveDate};
 use rand::Rng;
 
 use crate::{
-    anger, apathy, danse_macabre::{memorize_death_danse, DanseMacabreCard, DanseMacabreCardKey}, emotions, fear, maya::{LongDate, MayaEpoch, RoundDate}, tao_te_ching::{memorize_tao_te_ching, TaoTeChingKey}
+    anger, apathy, danse_macabre::{memorize_death_danse, DanseMacabreCard, DanseMacabreCardKey}, emotions, fear, maya::{LongDate, MayaEpoch, RoundDate}, psalms, tao_te_ching::{memorize_tao_te_ching, TaoTeChingKey}
 };
 
 pub struct Decks {
@@ -12,6 +12,7 @@ pub struct Decks {
     pub apathy: Vec<String>,
     pub emotions: Vec<String>,
     pub fear: Vec<String>,
+    pub pslams: Vec<String>
 }
 
 pub enum Cmd {
@@ -22,6 +23,7 @@ pub enum Cmd {
     Apathy,
     Emotions,
     Fear,
+    Pslam
 }
 
 pub type CmdRecorder = fn() -> String;
@@ -170,6 +172,7 @@ pub fn formulate_cmd_conveyance(decks: &Decks, cmd: Cmd) -> String {
         Cmd::Apathy => select_random(&decks.apathy),
         Cmd::Emotions => select_random(&decks.emotions),
         Cmd::Fear => select_random(&decks.fear),
+        Cmd::Pslam => select_random(&decks.pslams)
     }
 }
 
@@ -190,6 +193,7 @@ pub fn try_craft_cmd(user_input: String) -> Option<Cmd> {
         | ["./apathy", _user_input @ ..] => Some(Cmd::Apathy),
         | ["./emotions", _user_input @ ..] => Some(Cmd::Emotions),
         | ["./fear", _user_input @ ..] => Some(Cmd::Fear),
+        | ["./pslam", _user_input @ ..] => Some(Cmd::Pslam),
         _ => None,
     }
 }
@@ -222,6 +226,7 @@ pub fn memorize_decks() -> Decks {
     let apathy = memorize_emotion(&apathy::record());
     let emotions = memorize_emotion(&emotions::record());
     let fear = memorize_emotion(&fear::record());
-    let decks = Decks { tao, danse, anger, apathy , emotions, fear };
+    let pslams = psalms::memorize_psalms();
+    let decks = Decks { tao, danse, anger, apathy , emotions, fear, pslams };
     decks
 }

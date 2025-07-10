@@ -9,6 +9,7 @@ mod anger;
 mod apathy;
 mod emotions;
 mod fear;
+mod psalms;
 
 
 fn main() {
